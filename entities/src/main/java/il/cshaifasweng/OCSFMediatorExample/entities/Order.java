@@ -29,15 +29,17 @@ public class Order implements Serializable {
 	private int totalPrice;
 	private String orderDate;
 	private Client client;
+	private Movie movie;
 	//private 
 	
 	public Order() {}
 	
-	public Order(List <Ticket> _ticketList,int _totalPrice,String _orderDate,Client _client){
+	public Order(List <Ticket> _ticketList,int _totalPrice,String _orderDate,Client _client,Movie _movie){
 		this.ticketList = _ticketList;
 		this.totalPrice = _totalPrice;
 		this.orderDate = _orderDate;
 		this.client = _client;
+		this.movie = _movie;
 	}
 	
 	public List<Ticket> getTicketList(){
@@ -71,6 +73,14 @@ public class Order implements Serializable {
 	
 	public void setClient(Client _client){
 		this.client = _client;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 }
 	

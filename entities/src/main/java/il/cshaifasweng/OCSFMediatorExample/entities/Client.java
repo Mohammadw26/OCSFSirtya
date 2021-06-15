@@ -28,7 +28,7 @@ public class Client implements Serializable {
 	private int ClientId;
 	private String ClientName;
 	private int ClientAge;
-	private List<Order> orders;
+	public List<Order> orders;
 	private int NumOfOrders;
 	private List<Complaint> Complaints;
 	private int NumOfComplaints;
