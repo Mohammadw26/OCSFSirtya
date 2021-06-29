@@ -46,7 +46,18 @@ public class Screening implements Serializable {
 	
 	private boolean[] seatsArray;
 	int availableSeats;
+	int soldSeats;
 	
+	
+	
+	public int getSoldSeats() {
+		return soldSeats;
+	}
+
+	public void setSoldSeats(int soldSeats) {
+		this.soldSeats = soldSeats;
+	}
+
 	public int getAvailableSeats() {
 		return availableSeats;
 	}

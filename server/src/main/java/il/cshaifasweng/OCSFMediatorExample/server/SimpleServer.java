@@ -423,6 +423,7 @@ public class SimpleServer extends AbstractServer {
 					scrn.setTakenSeatAt(request.getSeats()[i]);
 				}
 				scrn.setAvailableSeats(scrn.getAvailableSeats() - request.getArrSize());
+				scrn.setSoldSeats(scrn.getSoldSeats() + request.getArrSize());
 				session.save(scrn);
 				session.flush();
 				session.getTransaction().commit();
@@ -457,6 +458,7 @@ public class SimpleServer extends AbstractServer {
 					scrn.setAvailableSeatAt(request.getSeats()[i]);
 				}
 				scrn.setAvailableSeats(scrn.getAvailableSeats() + request.getArrSize());
+				scrn.setSoldSeats(scrn.getSoldSeats() - request.getArrSize());
 				session.save(scrn);
 				session.flush();
 				session.getTransaction().commit();
@@ -496,17 +498,24 @@ public class SimpleServer extends AbstractServer {
 	private void finishOrder(FullOrderRequest request, ConnectionToClient client) throws Exception {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy ',' HH:mm:ss");
 		String transactionTime = formatter.format(LocalDateTime.now());
+		request.setTransactionTime(transactionTime);
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		List<Screening> tempList = getAll(Screening.class);
+		for (Screening tempScrn : tempList) {
+			if (tempScrn.getId()==request.getRequest().getScreening().getId()) {
+				request.getRequest().setScreening(tempScrn);
+			}
+		}
 		if (request.isNewCustomerFlag() && !request.isSignupFlag()) {
-			session = sessionFactory.openSession();
-			session.beginTransaction();
 			CasualBuyer newCus = new CasualBuyer(request.getFirstName(), request.getLastName(), request.getCustomerID(),
 					request.getCardNum(), request.getEmail());
 			session.save(newCus);
 			session.flush();
 			BookingRequest temp = request.getRequest();
 			for (int i = 0; i < temp.getArrSize(); i++) {
-				Ticket newTicket = new Ticket(temp.getScreening(), newCus, temp.getSeatIds()[i], temp.getCost(),
-						transactionTime);
+				Ticket newTicket = new Ticket(temp.getScreening(), newCus, temp.getSeatIds()[i], temp.getCost(), request.getCardNum(),transactionTime);
+				session.save(temp.getScreening());
 				session.save(newTicket);
 				session.flush();
 			}
@@ -514,7 +523,6 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.getTransaction().commit();
 			try {
-				request.setTransactionTime(transactionTime);
 				client.sendToClient(new Message("#BookedNonMember", request));
 				SendEmail(request);
 			} catch (IOException e) {
@@ -525,8 +533,6 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		} else if (request.isNewCustomerFlag() && request.isSignupFlag()) {
-			session = sessionFactory.openSession();
-			session.beginTransaction();
 			CinemaMember newCus = new CinemaMember(request.getFirstName(), request.getLastName(),
 					request.getCustomerID(), request.getCardNum(), request.getEmail(), request.getUsername(),
 					request.getPassword());
@@ -541,15 +547,14 @@ public class SimpleServer extends AbstractServer {
 			BookingRequest temp = request.getRequest();
 			for (int i = 0; i < temp.getArrSize(); i++) {
 				if (request.getUsePack() > 0 && newCus.getTicketsCredit() > 0) {
-					Ticket newTicket = new Ticket(temp.getScreening(), newCus, temp.getSeatIds()[i], 0,
-							transactionTime);
+					Ticket newTicket = new Ticket(temp.getScreening(), newCus, temp.getSeatIds()[i], 0, request.getCardNum(),transactionTime);
 					request.setUsePack(request.getUsePack() - 1);
 					newCus.setTicketsCredit(newCus.getTicketsCredit() - 1);
 					session.save(newTicket);
 					session.flush();
 				} else {
-					Ticket newTicket = new Ticket(temp.getScreening(), newCus, temp.getSeatIds()[i], temp.getCost(),
-							transactionTime);
+					Ticket newTicket = new Ticket(temp.getScreening(), newCus, temp.getSeatIds()[i], temp.getCost(),request.getCardNum(),transactionTime);
+					session.save(temp.getScreening());
 					session.save(newTicket);
 					session.flush();
 				}
@@ -568,8 +573,6 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		} else {
-			session = sessionFactory.openSession();
-			session.beginTransaction();
 			List<CinemaMember> membersList = getAll(CinemaMember.class);
 			if (!membersList.isEmpty()) {
 				for (CinemaMember member : membersList) {
@@ -584,15 +587,15 @@ public class SimpleServer extends AbstractServer {
 							BookingRequest temp = request.getRequest();
 							for (int i = 0; i < temp.getArrSize(); i++) {
 								if (request.getUsePack() > 0 && member.getTicketsCredit() > 0) {
-									Ticket newTicket = new Ticket(temp.getScreening(), member, temp.getSeatIds()[i], 0,
-											transactionTime);
+									Ticket newTicket = new Ticket(temp.getScreening(), member, temp.getSeatIds()[i], 0, request.getCardNum() ,transactionTime);
 									request.setUsePack(request.getUsePack() - 1);
 									member.setTicketsCredit(member.getTicketsCredit() - 1);
+									session.save(temp.getScreening());
 									session.save(newTicket);
 									session.flush();
 								} else {
-									Ticket newTicket = new Ticket(temp.getScreening(), member, temp.getSeatIds()[i],
-											temp.getCost(), transactionTime);
+									Ticket newTicket = new Ticket(temp.getScreening(), member, temp.getSeatIds()[i], temp.getCost(), request.getCardNum(), transactionTime);
+									session.save(temp.getScreening());
 									session.save(newTicket);
 									session.flush();
 								}
