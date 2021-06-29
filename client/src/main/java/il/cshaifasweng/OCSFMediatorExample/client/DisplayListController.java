@@ -54,7 +54,7 @@ public class DisplayListController {
 		DisplayListController.worker = worker;
 	}
 
-	public static Worker getWorker() {
+	static Worker getWorker() {
 		return worker;
 	}
 
@@ -271,6 +271,17 @@ public class DisplayListController {
 			e.printStackTrace();
 		}
 
+    }
+	
+
+    @FXML
+    void ViewReports(ActionEvent event) {
+		try {
+			SimpleClient.getClient().sendToServer("#ReportsRequest");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
 	
     @FXML

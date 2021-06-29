@@ -21,6 +21,10 @@ public class Rent extends Purchase {
 	@JoinColumn(name = "rent_movie")
 	private OnDemandMovie movie;
 	
+	public static double totalRentIncome =0.0;
+	public static double totalRentedLinks =0.0;
+
+	
 	public Rent() {}
 	
 	public Rent(CasualBuyer client, double cost, OnDemandMovie movie, String expiringLink, long cardNum, String transactionTime) {

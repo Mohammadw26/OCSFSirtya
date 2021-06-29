@@ -20,6 +20,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.CinemaMovie;
 import il.cshaifasweng.OCSFMediatorExample.entities.ComingSoonMovie;
 import il.cshaifasweng.OCSFMediatorExample.entities.Movie;
 import il.cshaifasweng.OCSFMediatorExample.entities.OnDemandMovie;
+import il.cshaifasweng.OCSFMediatorExample.entities.Purchase;
 import il.cshaifasweng.OCSFMediatorExample.entities.SirtyaBranch;
 import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
 
@@ -104,6 +105,21 @@ public class App extends Application {
 		}
     }
 	
+//	@SuppressWarnings("unchecked")
+//	@Subscribe
+//    public void onBranchesReportsReceivedEvent(BranchesReportsReceivedEvent event) {
+//		TicketsSalesReportController.setAllBranches((List<SirtyaBranch>) event.getBranchesList());
+//		if(TicketsSalesReportController.getAllBranches().isEmpty()) {
+//			printf
+//		}
+//		try {
+//			App.setRoot("reportsReview");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    }
+	
 	@SuppressWarnings("unchecked")
 	@Subscribe
     public void onWorkersReceivedEvent(WorkersReceivedEvent event) {
@@ -115,6 +131,18 @@ public class App extends Application {
 			e.printStackTrace();
 		}
     }
+	
+//	@SuppressWarnings("unchecked")
+//	@Subscribe
+//    public void onSalesReceivedEvent(SalesReceivedEvent event) {
+//		RentLinksReportsController.setOthersList((List<Purchase>) event.getSalesList());
+//		try {
+//			App.setRoot("adminPanel");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    }
 	
 	
 
