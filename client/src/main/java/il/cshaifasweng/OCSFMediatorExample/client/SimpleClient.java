@@ -15,6 +15,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.FullOrderRequest;
 import il.cshaifasweng.OCSFMediatorExample.entities.LogInRequest;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Movie;
+import il.cshaifasweng.OCSFMediatorExample.entities.Price;
 import il.cshaifasweng.OCSFMediatorExample.entities.Purchase;
 import il.cshaifasweng.OCSFMediatorExample.entities.RentRequest;
 import il.cshaifasweng.OCSFMediatorExample.entities.Screening;
@@ -31,6 +32,7 @@ public class SimpleClient extends AbstractClient {
 		super(host, port);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		String msgString = ((Message) msg).getMessage();
@@ -39,6 +41,9 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if (msgString.startsWith("#BranchesList")) {
 			EventBus.getDefault().post(new BranchesReceivedEvent((Message) msg));
+		}
+		else if (msgString.startsWith("#PricesList")) {
+			EventBus.getDefault().post(new PriceReceivedEvent((Message) msg));
 		}
 		else if (msgString.startsWith("#WorkersList")) {
 			EventBus.getDefault().post(new WorkersReceivedEvent((Message) msg));
@@ -60,6 +65,26 @@ public class SimpleClient extends AbstractClient {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else if (msgString.startsWith("#RefreshDeletePrice")) {
+			EventBus.getDefault().post(new PriceReceivedEvent((Message) msg));
+//			PriceRequestsController.setAllPrices((List<Price>)((Message) msg).getObject());
+//			try {
+//				App.setRoot("priceRequest");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+		}
+		else if (msgString.startsWith("#RefreshChangePrice")) {
+			EventBus.getDefault().post(new PriceReceivedEvent((Message) msg));
+//			PriceRequestsController.setAllPrices((List<Price>)((Message) msg).getObject());
+//			try {
+//				App.setRoot("priceRequest");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 		else if (msgString.startsWith("#RefreshDelete")) {
 			EditMovieScreeningsController.setMovie((CinemaMovie) ((Message) msg).getObject());
