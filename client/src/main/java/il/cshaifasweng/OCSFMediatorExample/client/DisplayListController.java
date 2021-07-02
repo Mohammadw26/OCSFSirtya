@@ -155,9 +155,22 @@ public class DisplayListController {
     private Button tavSagoalBtn;
     
     @FXML
+    private Button purchaseHistory;
+    
+    @FXML
     void loadTavSagoalUpdate(ActionEvent event) {
 		try {
 			App.setRoot("TavSagoalUpdating");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    @FXML
+    void loadHistoryPage(ActionEvent event) {
+		try {
+			App.setRoot("purchaseHistory");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

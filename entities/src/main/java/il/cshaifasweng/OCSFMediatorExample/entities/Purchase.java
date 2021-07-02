@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author Elias sh
+ *
+ */
 @Entity
 @Table(name = "purchases")
 @Inheritance
@@ -32,6 +36,9 @@ public class Purchase implements Serializable {
 	protected double cost;
 	protected String transactionTime;
 	protected long creditCardNum;
+	protected String purchaseType;
+	protected String details;
+	protected String status;
 
 	public CasualBuyer getCustomer() {
 		return customer;
@@ -75,6 +82,30 @@ public class Purchase implements Serializable {
 
 	public void setTransactionTime(String transactionTime) {
 		this.transactionTime = transactionTime;
+	}
+
+	public String getPurchaseType() {
+		return purchaseType;
+	}
+
+	public void setPurchaseType(String purchaseType) {
+		this.purchaseType = purchaseType;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

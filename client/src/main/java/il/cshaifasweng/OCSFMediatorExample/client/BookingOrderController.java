@@ -32,8 +32,6 @@ public class BookingOrderController {
 	private static BookingRequest request;
 	private static Screening screening;
 	
-	
-	
     public static int getStatus() {
 		return status;
 	}

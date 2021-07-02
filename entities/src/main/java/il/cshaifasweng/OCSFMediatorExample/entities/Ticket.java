@@ -20,18 +20,23 @@ public class Ticket extends Purchase {
 	@JoinColumn(name = "ticket_screening")
 	private Screening screening;
 	private String seat;
+	private int seatNum;
 	private boolean refunded;
 	
 	public Ticket() {}
 	
-	public Ticket(Screening screening, CasualBuyer user, String seatID, double cost, long cardNum, String transactionTime) {
+	public Ticket(Screening screening, CasualBuyer user, String seatID, int seatNum, double cost, long cardNum, String transactionTime) {
 	this.screening = screening;
 	this.customer = user;
 	this.seat = seatID;
-	this.customer.addTicket(this);
+	this.seatNum = seatNum;
+	this.customer.addPurchase(this);
 	this.cost = cost;
 	this.transactionTime = transactionTime;
 	this.creditCardNum = cardNum;
+	this.purchaseType = "Cinema Ticket";
+	this.details = "Movie: " + ",Time: " + screening.getMovie().getMovieTitle() + " " + screening.getScreeningDate() + " " + screening.getScreeningTime() + ", SeatID: " + this.seat;
+	this.status = "Success";
 	}
 	
 	public Screening getScreening() {
@@ -61,6 +66,15 @@ public class Ticket extends Purchase {
 		this.refunded = refunded;
 	}
 
+	public int getSeatNum() {
+		return seatNum;
+	}
+
+	public void setSeatNum(int seatNum) {
+		this.seatNum = seatNum;
+	}
+	
+	
 }
 	
 

@@ -51,6 +51,26 @@ public class CasualBuyer implements Serializable {
 		complaints = new ArrayList<Complaint>();
 		purchases = new ArrayList<Purchase>();
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<Complaint> getComplaints() {
+		return complaints;
+	}
+
+	public void setComplaints(List<Complaint> complaints) {
+		this.complaints = complaints;
+	}
+
+	public void setPurchases(List<Purchase> purchases) {
+		this.purchases = purchases;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -76,11 +96,11 @@ public class CasualBuyer implements Serializable {
 		this.customerId = customerId;
 	}
 
-	public List<Purchase> getTickets() {
+	public List<Purchase> getPurchases() {
 		return purchases;
 	}
 
-	public void addTicket(Purchase purchase) {
+	public void addPurchase(Purchase purchase) {
 		this.purchases.add(purchase);
 	}
 
