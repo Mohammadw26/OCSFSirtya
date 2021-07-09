@@ -12,21 +12,29 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane hbarPolicy="NEVER" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.DisplayListController">
+<ScrollPane hbarPolicy="NEVER" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.DisplayListController">
    <content>
       <AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1331.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
          <children>
             <ImageView blendMode="SRC_ATOP" fitHeight="1365.0" fitWidth="1281.0" pickOnBounds="true">
                <image>
-                  <Image url="@wp2734837.jpg" />
+                  <Image url="@woodbackground.jpg" />
                </image>
             </ImageView>
             <ToolBar prefHeight="46.0" prefWidth="1280.0" style="-fx-base: rgb(39,40,40); -fx-font-size: 12pt; -fx-background-color: linear-gradient(to bottom, derive(-fx-base,-30%), derive(-fx-base,-60%)),                linear-gradient(to bottom, rgb(74,75,78) 2%, rgb(39,40,40) 98%); -fx-background-insets: 0, 0 0 1 0; -fx-effect: dropshadow(two-pass-box,black,5,.2,0,0);">
               <items>
                 <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#returnToMain" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Home Page">
+                     <font>
+                        <Font name="Arial" size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="compliantsBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Review Compliants" visible="false">
                      <font>
                         <Font name="Arial" size="10.0" />
                      </font>
@@ -51,7 +59,7 @@
                         <Font name="Arial" size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="tavSagoalBtn" mnemonicParsing="false" onAction="#loadTavSagoalUpdate" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Update TavSagoal" visible="false">
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Home Page" visible="false">
                      <font>
                         <Font name="Arial" size="10.0" />
                      </font>
@@ -74,8 +82,8 @@
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </opaqueInsets>
             </GridPane>
-            <FontAwesomeIconView fx:id="prevBtn" fill="WHITE" glyphName="ANGLE_DOUBLE_LEFT" layoutX="40.0" layoutY="299.0" onMouseClicked="#prevPage" size="50" text="" />
-            <FontAwesomeIconView fx:id="nxtBtn" fill="WHITE" glyphName="ANGLE_DOUBLE_RIGHT" layoutX="1213.0" layoutY="303.0" onMouseClicked="#nextPage" size="50" text="" wrappingWidth="14.285714149475098" />
+            <FontAwesomeIconView fx:id="prevBtn" fill="WHITE" glyphName="ANGLE_DOUBLE_LEFT" layoutX="46.0" layoutY="303.0" onMouseClicked="#prevPage" size="50" text="" />
+            <FontAwesomeIconView fx:id="nxtBtn" fill="WHITE" glyphName="ANGLE_DOUBLE_RIGHT" layoutX="1216.0" layoutY="315.0" onMouseClicked="#nextPage" size="50" text="" wrappingWidth="14.285714149475098" />
             <GridPane fx:id="gridList2" hgap="15.0" layoutX="81.0" layoutY="521.0" prefHeight="340.0" prefWidth="1119.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -92,15 +100,47 @@
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </opaqueInsets>
             </GridPane>
-            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="98.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies available On-Demand">
+            <Text fontSmoothingType="LCD" layoutX="98.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies available On-Demand">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5627167820930481" green="1.0" blue="0.10999999940395355" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.8982658982276917" green="1.0" blue="0.20000000298023224" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
             </Text>
-            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="97.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies that are currently available in Dream Palace branches:">
+            <Text fontSmoothingType="LCD" layoutX="97.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Movies that are currently available in Dream Palace branches:">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Text>
+               </font>
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5627167820930481" green="1.0" blue="0.10999999940395355" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.8982658982276917" green="1.0" blue="0.20000000298023224" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill></Text>
             <GridPane fx:id="gridList3" hgap="15.0" layoutX="80.0" layoutY="920.0" prefHeight="340.0" prefWidth="1119.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -117,10 +157,26 @@
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </opaqueInsets>
             </GridPane>
-            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="99.0" layoutY="904.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon">
+            <Text fontSmoothingType="LCD" layoutX="99.0" layoutY="904.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coming soon">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.5627167820930481" green="1.0" blue="0.10999999940395355" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.8982658982276917" green="1.0" blue="0.20000000298023224" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </fill>
             </Text>
             <Label fx:id="identityLabel" alignment="TOP_LEFT" layoutX="1049.0" layoutY="4.0" prefHeight="38.0" prefWidth="114.0" text="Logged in as:" textFill="WHITE" />
             <Button fx:id="logOutBtn" layoutX="1164.0" layoutY="7.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #d40b00 100%),               linear-gradient(#d40b00, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Log Out" visible="false">
@@ -128,25 +184,10 @@
                   <Font name="Arial" size="10.0" />
                </font>
             </Button>
-            <FontAwesomeIconView fx:id="nxtBtn1" fill="WHITE" glyphName="ANGLE_DOUBLE_RIGHT" layoutX="1213.0" layoutY="1107.0" onMouseClicked="#nextPage1" size="50" text="" wrappingWidth="14.285714149475098" />
-            <FontAwesomeIconView fx:id="prevBtn1" fill="WHITE" glyphName="ANGLE_DOUBLE_LEFT" layoutX="39.0" layoutY="1105.0" onMouseClicked="#prevPage1" size="50" text="" />
-            <FontAwesomeIconView fx:id="nxtBtn2" fill="WHITE" glyphName="ANGLE_DOUBLE_RIGHT" layoutX="1214.0" layoutY="709.0" onMouseClicked="#nextPage2" size="50" text="" wrappingWidth="14.285714149475098" />
-            <FontAwesomeIconView fx:id="prevBtn2" fill="WHITE" glyphName="ANGLE_DOUBLE_LEFT" layoutX="43.0" layoutY="706.0" onMouseClicked="#prevPage2" size="50" text="" />
-            <Button fx:id="purchaseHistory" layoutX="4.0" layoutY="46.0" mnemonicParsing="false" onAction="#loadHistoryPage" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Purchase History">
-               <font>
-                  <Font name="Arial" size="10.0" />
-               </font>
-            </Button>
-            <Button fx:id="filterLists" layoutX="116.0" layoutY="46.0" mnemonicParsing="false" onAction="#loadFiltering" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Filter Lists">
-               <font>
-                  <Font name="Arial" size="10.0" />
-               </font>
-            </Button>
-            <Button fx:id="compliantsBtn" layoutX="228.0" layoutY="46.0" mnemonicParsing="false" onAction="#GoToAddComplaint" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #090a0c,               linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),               linear-gradient(#20262b, #191d22),               radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0)); -fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-text-fill: white; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 ); -fx-text-fill: linear-gradient(white, #d0d0d0);" text="Contact Us">
-               <font>
-                  <Font name="Arial" size="10.0" />
-               </font>
-            </Button>
+            <FontAwesomeIconView fx:id="nxtBtn1" fill="WHITE" glyphName="ANGLE_DOUBLE_RIGHT" layoutX="1223.0" layoutY="1133.0" onMouseClicked="#nextPage1" size="50" text="" wrappingWidth="14.285714149475098" />
+            <FontAwesomeIconView fx:id="prevBtn1" fill="WHITE" glyphName="ANGLE_DOUBLE_LEFT" layoutX="46.0" layoutY="1133.0" onMouseClicked="#prevPage1" size="50" text="" />
+            <FontAwesomeIconView fx:id="nxtBtn2" fill="WHITE" glyphName="ANGLE_DOUBLE_RIGHT" layoutX="1216.0" layoutY="715.0" onMouseClicked="#nextPage2" size="50" text="" wrappingWidth="14.285714149475098" />
+            <FontAwesomeIconView fx:id="prevBtn2" fill="WHITE" glyphName="ANGLE_DOUBLE_LEFT" layoutX="46.0" layoutY="715.0" onMouseClicked="#prevPage2" size="50" text="" />
          </children>
       </AnchorPane>
    </content>
