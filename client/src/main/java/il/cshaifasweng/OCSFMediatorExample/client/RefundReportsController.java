@@ -5,27 +5,41 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.BranchManager;
 import il.cshaifasweng.OCSFMediatorExample.entities.GeneralManager;
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Price;
 import il.cshaifasweng.OCSFMediatorExample.entities.Purchase;
+import il.cshaifasweng.OCSFMediatorExample.entities.Rent;
 import il.cshaifasweng.OCSFMediatorExample.entities.SirtyaBranch;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
-public class ReportsReviewController {
-	private static List<Purchase> othersList;
+public class RefundReportsController {
 	private static List<SirtyaBranch> allBranches;
+	private static List<Purchase> othersList;
+	double linksCost = 0;
 
-	
+	public static List<SirtyaBranch> getAllBranches() {
+		return allBranches;
+	}
+
+	public static void setAllBranches(List<SirtyaBranch> list) {
+		RefundReportsController.allBranches = list;
+	}
+
+	ObservableList<SirtyaBranch> list = FXCollections.observableArrayList();
+
 	@FXML
 	private ResourceBundle resources;
 
@@ -46,6 +60,16 @@ public class ReportsReviewController {
 
 	@FXML
 	private Button complaintsBtn;
+
+	@FXML
+	private TableView<SirtyaBranch> branchesTable;
+
+	@FXML
+	private TableColumn<SirtyaBranch, String> branchCol;
+
+	@FXML
+	private TableColumn<SirtyaBranch, Double> totalIncomeCol;
+
 
 	@FXML
 	private Button backButton;
@@ -69,7 +93,7 @@ public class ReportsReviewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+	}
 
 	@FXML
 	void RefundsView(ActionEvent event) {
@@ -81,6 +105,8 @@ public class ReportsReviewController {
 		}
 	}
 
+	
+
 	@FXML
 	void TicketSalesView(ActionEvent event) {
 		if (DisplayListController.getWorker().getClass().equals(GeneralManager.class)) {
@@ -90,7 +116,7 @@ public class ReportsReviewController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+
 		} else if (DisplayListController.getWorker().getClass().equals(BranchManager.class)) {
 			try {
 				SimpleClient.getClient().sendToServer("#BranchesTicketsReportsRequest");
@@ -115,52 +141,39 @@ public class ReportsReviewController {
 
 	@FXML
 	void initialize() {
-		assert mainPane != null : "fx:id=\"mainPane\" was not injected: check your FXML file 'reportsReview.fxml'.";
+		if (!EventBus.getDefault().isRegistered(allBranches)) {
+			EventBus.getDefault().register(this);
+		}
+
+		branchCol.setCellValueFactory(new PropertyValueFactory<SirtyaBranch, String>("address"));
+		totalIncomeCol.setCellValueFactory(new PropertyValueFactory<SirtyaBranch, Double>("totalPurpleRefund"));
+		assert mainPane != null : "fx:id=\"mainPane\" was not injected: check your FXML file 'refundReports.fxml'.";
 		assert ticketSalesBtn != null
-				: "fx:id=\"ticketSalesBtn\" was not injected: check your FXML file 'reportsReview.fxml'.";
+				: "fx:id=\"ticketSalesBtn\" was not injected: check your FXML file 'refundReports.fxml'.";
 		assert otherSalesBtn != null
-				: "fx:id=\"otherSalesBtn\" was not injected: check your FXML file 'reportsReview.fxml'.";
+				: "fx:id=\"otherSalesBtn\" was not injected: check your FXML file 'refundReports.fxml'.";
 		assert refundsReportsBtn != null
-				: "fx:id=\"refundsReportsBtn\" was not injected: check your FXML file 'reportsReview.fxml'.";
+				: "fx:id=\"refundsReportsBtn\" was not injected: check your FXML file 'refundReports.fxml'.";
 		assert complaintsBtn != null
-				: "fx:id=\"complaintsBtn\" was not injected: check your FXML file 'reportsReview.fxml'.";
-		assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'reportsReview.fxml'.";
+				: "fx:id=\"complaintsBtn\" was not injected: check your FXML file 'refundReports.fxml'.";
+		assert branchesTable != null
+				: "fx:id=\"branchesTable\" was not injected: check your FXML file 'refundReports.fxml'.";
+		assert branchCol != null : "fx:id=\"branchCol\" was not injected: check your FXML file 'refundReports.fxml'.";
+		assert totalIncomeCol != null
+				: "fx:id=\"totalIncomeCol\" was not injected: check your FXML file 'refundReports.fxml'.";
+		assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'refundReports.fxml'.";
 
 	}
 
-//	private void loadUI(String ui) {
-//		Parent root = null;
-//		try {
-//			root = FXMLLoader.load(getClass().getResource(ui));
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		}
-//		mainPane.setCenter(root);
-//	}
-	
-//	@Subscribe
-//	public void onReportsViewEvent(ReportsViewEvent event) {
-//		Platform.runLater(()->{
-//			TicketsSalesReportController.setAllBranches(event.getBranchesList());
-//			RentLinksReportsController.setOthersList((List<Purchase>) event.getPurchasesListDemand());
-//			TicketSalesView(null);
-//		});
-//	}
+	@Subscribe
+	public void onRefundReportsEvent(RefundReportsEvent event) {
 
-	public static List<SirtyaBranch> getAllBranches() {
-		return allBranches;
-	}
+		Platform.runLater(() -> {
+			list.clear();
+			list.addAll((List<SirtyaBranch>) event.getBranchesList());
+			branchesTable.getItems().clear();
+			branchesTable.getItems().addAll(list);
 
-	public static void setAllBranches(List<SirtyaBranch> allBranches) {
-		ReportsReviewController.allBranches = allBranches;
+		});
 	}
-
-	public static List<Purchase> getOthersList() {
-		return othersList;
-	}
-
-	public static void setOthersList(List<Purchase> othersList) {
-		ReportsReviewController.othersList = othersList;
-	}
-	
 }
