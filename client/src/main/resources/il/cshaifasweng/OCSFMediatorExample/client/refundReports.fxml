@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.TicketsSalesReportController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.RefundReportsController">
    <children>
       <ToolBar layoutX="-2.0" layoutY="-2.0" prefHeight="40.0" prefWidth="1282.0" style="-fx-background-color: #792f2f;">
          <items>
@@ -41,17 +41,15 @@
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #792f2f;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#fafafa" layoutX="335.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets Sales Report">
+                  <Text fill="#fafafa" layoutX="335.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refunds Report">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="branchesTable" layoutX="193.0" layoutY="132.0" prefHeight="335.0" prefWidth="414.0">
+                  <TableView fx:id="branchesTable" layoutX="268.0" layoutY="216.0" prefHeight="248.0" prefWidth="333.0">
                      <columns>
-                        <TableColumn fx:id="branchCol" prefWidth="117.60003662109375" text="Branch" />
-                        <TableColumn fx:id="ticketsSoldCol" prefWidth="83.99993896484375" text="Tickets Sold" />
-                        <TableColumn fx:id="totalIncomeCol" prefWidth="104.79998779296875" resizable="false" text="Total Income" />
-                        <TableColumn fx:id="tabTicketsCol" prefWidth="109.5999755859375" text="Tab Tickets" />
+                        <TableColumn fx:id="branchCol" prefWidth="176.79998779296875" text="Branch" />
+                        <TableColumn fx:id="totalIncomeCol" prefWidth="155.19992065429688" resizable="false" text="Total Refunds" />
                      </columns>
                   </TableView>
                </children>
